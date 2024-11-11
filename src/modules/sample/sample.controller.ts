@@ -1,5 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { SampleService } from './sample.service';
+import { ISample } from '@Models/sample';
+import { SampleDTO } from '@DTO/sample';
 
 @Controller('sample')
 export class SampleController {
@@ -9,7 +11,7 @@ export class SampleController {
   ){}
   
   @Get()
-  findAll(): string {
+  findAll(): ISample[] {
    return this.sampleService.findAll()
   }
 
@@ -19,25 +21,26 @@ export class SampleController {
   }
 
   @Get(':id') // get any :id
-  findOne( @Param() param:any ):string{
-    return this.sampleService.findOne( param.id )
+  findOne( @Param() param:any ): ISample{
+    const found = this.sampleService.findOne( param.id )
+    return found
   }
 
   @Delete(':id')
-  deleteOne( @Param() param:any ): string{
+  deleteOne( @Param() param:any ): ISample{
     return this.sampleService.deleteOne(param.id)
   }
 
   @Put(':id')
   updateOne(
     @Param() param:any ,
-    @Body() data:any, 
-  ):string{
+    @Body() data: SampleDTO, 
+  ):ISample{
     return this.sampleService.updateOne(param.id , data )
   }
 
   @Post()
-  createOne( @Body() data:any ):string{
+  createOne( @Body() data: SampleDTO ): ISample{
     return this.sampleService.create(data ) 
   }
 }
