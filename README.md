@@ -32,6 +32,14 @@
 $ npm install
 ```
 
+## DB Operation
+
+```bash
+$ npm run prisma migrate dev -- --name init_app_db
+$ npm run prisma generate
+$ npm run prisma migrate deploy
+```
+
 ## Running the app
 
 ```bash
