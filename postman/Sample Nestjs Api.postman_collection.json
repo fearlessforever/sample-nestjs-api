@@ -10,6 +10,23 @@
 			"item": [
 				{
 					"name": "GetAll",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code == 200){",
+									"    const dataJson = pm.response.json()",
+									"    if(dataJson && dataJson[0]){",
+									"        pm.environment.set(\"sample_id\",dataJson[0].id)",
+									"    }",
+									"    ",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -31,13 +48,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/sample/1",
+							"raw": "{{base_url}}/sample/{{sample_id}}",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"sample",
-								"1"
+								"{{sample_id}}"
 							]
 						}
 					},
@@ -45,12 +62,26 @@
 				},
 				{
 					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code == 200){",
+									"    const dataJson = pm.response.json()",
+									"    pm.environment.set(\"sample_id\",dataJson.id)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"Name\":\"Test\",\n    \"Message\":\"Message is fine\"\n}",
+							"raw": "{\n    \"name\":\"Test Updated\",\n    \"message\":\"Message is fine Updated\",\n    \"status\":\"DRAFT\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -58,13 +89,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/sample/1",
+							"raw": "{{base_url}}/sample/{{sample_id}}",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"sample",
-								"1"
+								"{{sample_id}}"
 							]
 						}
 					},
@@ -76,13 +107,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/sample/1",
+							"raw": "{{base_url}}/sample/{{sample_id}}",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"sample",
-								"1"
+								"{{sample_id}}"
 							]
 						}
 					},
@@ -90,12 +121,26 @@
 				},
 				{
 					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code == 201){",
+									"    const dataJson = pm.response.json()",
+									"    pm.environment.set(\"sample_id\",dataJson.id)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"Name\":\"Test\",\n    \"Message\":\"Message is fine\"\n}",
+							"raw": "{\n    \"name\":\"Test\",\n    \"message\":\"Message is fine\",\n    \"status\":\"DRAFT\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -109,6 +154,141 @@
 							],
 							"path": [
 								"sample"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sample-Employee",
+			"item": [
+				{
+					"name": "GetAll",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code == 200){",
+									"    const dataJson = pm.response.json()",
+									"    if(dataJson && dataJson[dataJson.length-1]){",
+									"        pm.environment.set(\"sample_employee_id\",dataJson[dataJson.length-1].id)",
+									"    }",
+									"    ",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/sample-employees",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"sample-employees"
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "ADMIN",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Test Employee Name\",\n    \"email\":\"test5@example.com\",\n    \"role\":\"ENGINEER\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/sample-employees",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"sample-employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/sample-employees/{{sample_employee_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"sample-employees",
+								"{{sample_employee_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Test Employee Name\",\n    \"role\":\"ADMIN\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/sample-employees/{{sample_employee_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"sample-employees",
+								"{{sample_employee_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/sample-employees/{{sample_employee_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"sample-employees",
+								"{{sample_employee_id}}"
 							]
 						}
 					},
