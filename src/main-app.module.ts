@@ -5,9 +5,10 @@ import { DatabaseModule } from './core/database/database.module';
 import { SampleEmployeesModule } from './modules/sample-employees/sample-employees.module';
 import { FileLoggerModule } from "./core/file-logger/file-logger.module";
 import { RateLimiterModule } from './core/rate-limiter/rate-limiter.module';
+import { MyAppFilterModule } from './core/filters/my-app-filter.module';
 
 @Module({
-  imports: [AppModule, SampleModule, DatabaseModule, SampleEmployeesModule, FileLoggerModule, RateLimiterModule],
+  imports: [AppModule, SampleModule, DatabaseModule, SampleEmployeesModule, FileLoggerModule, RateLimiterModule, MyAppFilterModule],
   controllers: [],
   providers: [],
 })
