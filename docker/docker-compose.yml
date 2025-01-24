@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  my-nestjs-prod:
+    image: my-nestjs:latest
+    container_name: my-nestjs
+    volumes:
+      - ../logs:/logs
+    environment:
+      - IS_FORWARD_LOG_TO_FILE=true
+    expose:
+      - '3000'
+    ports:
+      - '3000:3000'
+    command: npm run start:prod
+    
+    # it seems like using image : node:alpine cant read HOST variable , that's why below line is required 
+    # 172.17.0.1 =  default IP HOST of docker
+    extra_hosts:
+      - "HOST_IP:172.17.0.1"
