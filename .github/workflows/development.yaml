@@ -3,12 +3,12 @@ name: Test & Build & Push Docker Image to Docker Hub
 on:
   push:
     branches:
-      - development
-  pull_request:
-    branches:
-      - development
-    types:
-      - closed
+      - development # this will also run after a branch merge into development
+  # pull_request:
+  #   branches:
+  #     - development
+  #   types:
+  #     - closed
 
 jobs:
   build:
