@@ -1,9 +1,9 @@
 name: Test & Build for any problem before PR
 
 on:
-  push:
-    branches:
-      - update
+  # push:
+  #   branches:
+  #     - update
   pull_request:
     branches:
       - development
