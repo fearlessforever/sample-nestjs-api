@@ -1,0 +1,8 @@
+/*
+Sample CSS file
+*/
+
+body footer p {
+  font-weight: bolder;
+  font-style: italic;
+}
