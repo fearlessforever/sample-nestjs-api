@@ -1,0 +1,61 @@
+<style>
+  #socket-contents{
+    max-height: 500px;
+    overflow-y: auto;
+    margin-top: 1rem;
+    max-width: 50%;
+  }
+</style>
+<button class="btn btn-primary" id="start-sample-event">Read Certain Event</button>
+
+<div id="socket-contents">
+
+</div>
+
+{{!-- <script src="/js/socket.io.min.js"></script> --}}
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+
+document.addEventListener('DOMContentLoaded',function(){
+  console.log(`${location.protocol}//${location.hostname}:${location.port}`)
+  // Example using Socket.IO client in a browser
+  //const socket = io(`${location.protocol}://${location.hostname}:${location.port}`); // Replace with your server address and port
+  const socket = io(`${window.location.host}`,{
+    //path:'/test',
+  }); // Replace with your server address and port
+
+  const mainElement = document.querySelector('#socket-contents')
+
+  socket.on('connect', () => {
+    //console.log('Connected to WebSocket server!');
+    socket.emit('sendMessage', 'Hello from the client!');
+  });
+
+  socket.on('message', (data) => {
+    //console.log('Received message:', data);
+    const content = document.createElement('div')
+    content.innerHTML = `${data}`
+    mainElement?.prepend(content)
+  });
+
+  socket.on('disconnect', () => {
+    const msg = 'Disconnected from WebSocket server.'
+    console.log(msg);
+    const content = document.createElement('div')
+    content.innerHTML = `${msg}`
+    mainElement?.prepend(content)
+  });
+
+  const startSampleEvent = document.querySelector('#start-sample-event')
+  if(startSampleEvent){
+    startSampleEvent.addEventListener('click', function(){
+      //alert(1)
+      if(socket)
+        socket.emit('sample-events', 'Send Another Event!');
+    })
+  }
+
+})
+  
+
+</script>
