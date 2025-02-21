@@ -6,10 +6,11 @@ import { AppModule } from "./app/app.module";
 import { SampleViewMvcModule } from "./sample-view-mvc/sample-view-mvc.module";
 import { SampleSseModule } from "./sample-sse/sample-sse.module";
 import { SampleSocketModule } from "./sample-socket/sample-socket.module";
+import { SampleQueueModule } from "./sample-queue/sample-queue.module";
 
 
 @Module({
-  imports: [AppModule, SampleModule, SampleEmployeesModule, SampleCacheUsageModule, SampleViewMvcModule, SampleSseModule, SampleSocketModule],
+  imports: [AppModule, SampleModule, SampleEmployeesModule, SampleCacheUsageModule, SampleViewMvcModule, SampleSseModule, SampleSocketModule, SampleQueueModule],
   controllers: [],
   providers: [],
 })
