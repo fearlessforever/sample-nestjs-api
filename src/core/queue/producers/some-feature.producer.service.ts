@@ -1,3 +1,4 @@
+import { SampleSendEmailDTO } from '@DTO/sample-send-email';
 import { InjectQueue } from '@nestjs/bullmq';
 import { Injectable } from '@nestjs/common';
 import { Queue } from 'bullmq';
@@ -12,5 +13,10 @@ export class SomeFeatureProducerService {
   async processData(data: any) {
     await this.someFeatureQueue.add('process-data-job', data, { delay: 1_000 }); // Add job with a name and payload
     return { message: 'Data processing job queued!' , data };
+  }
+
+  async sendEmail( data: SampleSendEmailDTO , html: string ){
+    await this.someFeatureQueue.add('send-email', { ...data , html }, { delay: 1_000 }); // Add job with a name and payload
+    return { message: 'Data processing job queued, sending email' , data };
   }
 }
