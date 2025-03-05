@@ -44,7 +44,7 @@ jobs:
 
       - name: Push Docker image to Docker Hub
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/nestjs-app:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/nestjs-app --all-tags
 
   test-build-and-release:
     runs-on: ubuntu-latest
