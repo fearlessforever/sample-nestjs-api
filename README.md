@@ -26,25 +26,38 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Sample / Feature Available
-- Simple usage controller , validation , service and route
-- Sample how to forward all log to file log ( each log file separate by date )
-- Sample how to use rate-limiter
-- Sample how to use cache in app memory or using redis
-- Sample usage database ( prisma / ORM : model , type , interface , migrations ) in controller , service , route dan validator
-- Sample how to use queue ( require redis  ) for heavy process ( background process ) / Scheduler
-- Sample how to use SSE ( Server Sent Events ) - realtime feature only server can send data
-- Sample how to use socket.io - realtime feature server <-> client send data
-- Sample how to use view engine templating for monolith ( traditional mvc ) and templating engine for email
-- Sample how to use CI/CD for nestjs application
-- Sample how to generate docker image ( optional: push image to docker hub by CI/CD release version )
-- Sample how to send email ( required queue feature activate ) and using view engine templating like hbs , or ejs
+# Sample / Feature Available
+- [x] Simple usage controller , validation , service and route [PR 5](https://github.com/fearlessforever/sample-nestjs-api/pull/5)
+- [x] Sample how to forward all log to file log ( each log file separate by date ) [PR 13](https://github.com/fearlessforever/sample-nestjs-api/pull/13)
+- [x] Sample how to use rate-limiter [PR 14](https://github.com/fearlessforever/sample-nestjs-api/pull/14)
+- [x] Sample how to use cache in app memory or using redis [PR 16](https://github.com/fearlessforever/sample-nestjs-api/pull/16)
+- [x] Sample usage database ( prisma / ORM : model , type , interface , migrations ) in controller , service , route dan validator [PR 8](https://github.com/fearlessforever/sample-nestjs-api/pull/8)
+- [x] Sample how to use queue ( require redis  ) for heavy process ( background process ) / Scheduler [PR 34](https://github.com/fearlessforever/sample-nestjs-api/pull/34)
+- [x] Sample how to use SSE ( Server Sent Events ) - realtime feature only server can send data [PR 32](https://github.com/fearlessforever/sample-nestjs-api/pull/32)
+- [x] Sample how to use socket.io - realtime feature server <-> client send data [PR 33](https://github.com/fearlessforever/sample-nestjs-api/pull/33)
+- [x] Sample how to use view engine templating for monolith ( traditional mvc ) and templating engine for email [PR 31](https://github.com/fearlessforever/sample-nestjs-api/pull/31)
+- [x] Sample how to use CI/CD for nestjs application [PR 20](https://github.com/fearlessforever/sample-nestjs-api/pull/20)
+- [x] Sample how to generate docker image ( optional: push image to docker hub by CI/CD release version ) [PR 19](https://github.com/fearlessforever/sample-nestjs-api/pull/19)
+- [ ] Sample Authentication / Authorization
+- [ ] Sample Implement Apache Kafka
+- [ ] Sample Implement gRPC
+- [x] Sample how to send email ( required queue feature activate ) and using view engine templating like hbs , or ejs [PR 35](https://github.com/fearlessforever/sample-nestjs-api/pull/35)
 
 ## Build & Running the app in docker [Production]
 ```bash
-$ ./run build-docker
-$ ./run run-docker
-$ ./run stop-docker
+$ ./run docker-build
+$ ./run docker-up
+$ ./run docker-down
+$ 
+$ # run npm command in docker
+$ ./run npm-in-docker run prisma version
+$
+$ # manually from docker, apply migration to db
+$ ./run npm-in-docker run prisma migrate deploy
+$
+$ # run app in docker & migration as well if any available
+$ # NOTE: this might take a while because of downloading prisma engine & deploy db changes
+$ ./run docker-up --profile migration
 ```
 ## Requirement & Optional Feature if Activate
 - nodejs: v18.16
