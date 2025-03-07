@@ -20,12 +20,16 @@ COPY ./tsconfig*.json ./
 # RUN npm i --force --loglevel verbose
 RUN npm run prisma generate && npm run build && rm -rf ./@types && rm -rf ./src && rm -rf node_modules
 # RUN npm install --production
-RUN --mount=type=cache,target=/root/.npm npm i --production --force --loglevel verbose
-RUN npm run prisma generate && rm -rf ./prisma
+RUN --mount=type=cache,target=/root/.npm npm i --omit=dev --force --loglevel verbose
 
 # FROM build_compile as production
 
 # build untuk production menggunakan minimize node:alpine untuk runtime
 FROM node:alpine as production
+# FROM node:lts-alpine as production
+RUN apk add --no-cache openssl
 
-COPY --from=build_compile /home/app /
+WORKDIR /app
+COPY --from=build_compile /home/app ./
+
+# RUN npm run prisma version
