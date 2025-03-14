@@ -44,9 +44,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       packages: write
-      # contents: read
-      # attestations: write
-      # id-token: write
+      contents: read
+      attestations: write
+      id-token: write
 
     steps:
       - name: Check out the repository
@@ -57,7 +57,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.MY_RELEASE_TOKEN }}
+          password: ${{ secrets.MY_PACKAGE_TOKEN }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
