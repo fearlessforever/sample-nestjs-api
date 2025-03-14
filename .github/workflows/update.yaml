@@ -42,6 +42,11 @@ jobs:
   build-and-publish-docker-image:
     needs: test-build
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+      attestations: write
+      id-token: write
 
     steps:
       - name: Check out the repository
