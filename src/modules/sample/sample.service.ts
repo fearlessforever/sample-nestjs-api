@@ -1,10 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { SampleDTO } from '@DTO/sample';
+import { ISample } from '@Models/sample';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { randomUUID } from 'crypto';
 
 @Injectable()
 export class SampleService {
 
+  private data: ISample[]= []
+
   findAll(){
-     return 'Sample Get All'
+     return this.data
   }
 
   findSpecial(){
@@ -12,18 +17,38 @@ export class SampleService {
   }
 
   findOne( id: any ){
-    return `Sample Get by Id : ${id}`
+    const found = this.data.find( val => val.id == id)
+
+    if(!found)
+      throw new NotFoundException(`Sample id : ${id} not found`)
+
+    return found
   }
 
   deleteOne( id:any ){
-    return `Sample Delete by Id : ${id}`
+    const deletedRow =  this.findOne(id)
+
+    this.data = this.data.filter(val => val.id !== deletedRow.id )
+    
+    return deletedRow
   }
 
-  updateOne( id: any , data:any ){
-    return `Sample Update by Id : ${id} -> ${JSON.stringify(data)}`
+  updateOne( id: any , data:SampleDTO ){
+    const selected = this.findOne(id)
+    for(let k in data){
+      selected[k] = data[k]
+    }
+
+    return selected
   }
 
-  create( data:any ){
-    return `Sample Create -> ${JSON.stringify(data)}`
+  create( data:SampleDTO ){
+    const sample:ISample = {
+      ...data,
+      id: randomUUID()
+    }
+
+    this.data.push(sample)
+    return sample
   }
 }

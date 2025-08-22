@@ -18,7 +18,10 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@DTO/*": ["./@types/DTO/*"],
+      "@Models/*": ["./@types/Models/*"],
+      "My": ["@types/my.ts"],
     }
   }
 }
