@@ -295,6 +295,65 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Sample-Cache-Usage",
+			"item": [
+				{
+					"name": "Manual Cache",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/sample-cache-usage/manual-cache",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"sample-cache-usage",
+								"manual-cache"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Auto Cache",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/sample-cache-usage/auto-cache-with-decorator",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"sample-cache-usage",
+								"auto-cache-with-decorator"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Auto Cache Custom TTL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/sample-cache-usage/auto-cache-with-custom-ttl",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"sample-cache-usage",
+								"auto-cache-with-custom-ttl"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

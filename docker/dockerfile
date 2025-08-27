@@ -1,0 +1,31 @@
+FROM node:18.16 as build_compile
+
+WORKDIR /home/app
+
+# COPY ./package*.json ./
+COPY ./package*.json ./
+
+#Cache npm to speed up
+RUN --mount=type=cache,target=/root/.npm npm i --force --loglevel verbose
+
+COPY ./@types ./@types
+COPY ./prisma ./prisma
+COPY ./src ./src
+COPY ./.eslintrc.js ./.eslintrc.js
+COPY ./nest-cli.json ./nest-cli.json
+COPY ./tsconfig*.json ./
+
+# RUN mkdir .build && npm run client:build && npm run server:build && rm -rf ./public && rm -rf ./src && rm -rf ./server && rm -rf node_modules && npm install --production
+# RUN npm config set strict-ssl false
+# RUN npm i --force --loglevel verbose
+RUN npm run prisma generate && npm run build && rm -rf ./@types && rm -rf ./src && rm -rf node_modules
+# RUN npm install --production
+RUN --mount=type=cache,target=/root/.npm npm i --production --force --loglevel verbose
+RUN npm run prisma generate && rm -rf ./prisma
+
+# FROM build_compile as production
+
+# build untuk production menggunakan minimize node:alpine untuk runtime
+FROM node:alpine as production
+
+COPY --from=build_compile /home/app /
