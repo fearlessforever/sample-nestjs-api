@@ -354,6 +354,79 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Sample-View-mvc",
+			"item": [
+				{
+					"name": "First Sample ( HTML response )",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/sample-view-mvc",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"sample-view-mvc"
+							]
+						},
+						"description": "Response is HTML"
+					},
+					"response": []
+				},
+				{
+					"name": "Second Sample ( HTML response )",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/sample-view-mvc/another",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"sample-view-mvc",
+								"another"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sample-SSE",
+			"item": [
+				{
+					"name": "SSE Page Open in Browser : http://localhost:3000/sample-sse",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sample-Socket",
+			"item": [
+				{
+					"name": "Socket Page Open in Browser : http://localhost:3000/sample-socket",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

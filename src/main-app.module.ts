@@ -5,9 +5,10 @@ import { RateLimiterModule } from './core/rate-limiter/rate-limiter.module';
 import { MyAppFilterModule } from './core/filters/my-app-filter.module';
 import { MyAppCacheModule } from "./core/database/my-app-cache.module";
 import { RoutesModule } from "./routes/module.routes";
+import { SocketModule } from './core/socket/socket.module';
 
 @Module({
-  imports: [ DatabaseModule , FileLoggerModule, RateLimiterModule, MyAppFilterModule, MyAppCacheModule, RoutesModule],
+  imports: [SocketModule.forRoot(), DatabaseModule , FileLoggerModule, RateLimiterModule, MyAppFilterModule, MyAppCacheModule, RoutesModule],
   controllers: [],
   providers: [],
 })
