@@ -18,7 +18,7 @@ export class FileLoggerService extends ConsoleLogger{
     }
   }
 
-  LogToFile( ...args:any[] ){
+  LogToFile( typeLog: string , ...args:any[] ){
     delay(27).then(_=>{
       const dateRightNow = new Date() , dateDetail = {
         year: dateRightNow.getFullYear() ,
@@ -34,33 +34,33 @@ export class FileLoggerService extends ConsoleLogger{
         this.createStreamFileLog( folderPath )
       }
       args.forEach(val=>{
-        this.fileLogStream?.write(`${zeroPad(dateRightNow.getHours(),2)}:${zeroPad(dateRightNow.getMinutes(),2)}:${zeroPad(dateRightNow.getSeconds(),2)} `+ util.format(val) + '\n')
+        this.fileLogStream?.write(`${zeroPad(dateRightNow.getHours(),2)}:${zeroPad(dateRightNow.getMinutes(),2)}:${zeroPad(dateRightNow.getSeconds(),2)} ${typeLog}`+ util.format(val) + '\n')
       })
     })
   }
 
   log(message: unknown, ...rest:any[] ): void {
-    this.LogToFile(`Log: ${message}`)
+    this.LogToFile(`Log:`, message, ...rest)
     super.log(message, ...rest)
   }
 
   error(message: unknown, ...rest:any[] ): void {
-    this.LogToFile(`Error: ${message}`)
+    this.LogToFile(`Error:`, message, ...rest)
     super.error(message, ...rest)
   }
 
   warn(message: unknown, ...rest:any[] ): void {
-    this.LogToFile(`Warn: ${message}`)
+    this.LogToFile(`Warn:`, message, ...rest)
     super.warn(message , ...rest )
   }
 
   fatal(message: unknown, ...rest:any[] ): void {
-    this.LogToFile(`Fatal Error: ${message}`)
+    this.LogToFile(`Fatal Error:`, message, ...rest)
     super.fatal(message , ...rest )
   }
 
   debug(message: unknown, ...rest:any[] ): void {
-    this.LogToFile(`Debug: ${message}`)
+    this.LogToFile(`Debug:`, message, ...rest)
     super.debug(message , ...rest )
   }
 

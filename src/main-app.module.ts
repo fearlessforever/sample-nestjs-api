@@ -6,9 +6,10 @@ import { MyAppFilterModule } from './core/filters/my-app-filter.module';
 import { MyAppCacheModule } from "./core/database/my-app-cache.module";
 import { RoutesModule } from "./routes/module.routes";
 import { SocketModule } from './core/socket/socket.module';
+import { QueueModule } from "./core/queue/queue.module";
 
 @Module({
-  imports: [SocketModule.forRoot(), DatabaseModule , FileLoggerModule, RateLimiterModule, MyAppFilterModule, MyAppCacheModule, RoutesModule],
+  imports: [SocketModule.forRoot(), QueueModule.forRoot(), DatabaseModule , FileLoggerModule, RateLimiterModule, MyAppFilterModule, MyAppCacheModule, RoutesModule],
   controllers: [],
   providers: [],
 })
