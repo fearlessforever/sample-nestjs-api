@@ -427,6 +427,59 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Sample-Queue",
+			"item": [
+				{
+					"name": "Trigger Background Job ( queue job )",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/sample-queue",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"sample-queue"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sample-Send-Email",
+			"item": [
+				{
+					"name": "Send Email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"aqhelaja@gmail.com\",\n    \"subject\":\"Test Send Email\",\n    \"message\":\"Email Message Content , test send email by nestjs\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/sample-send-email",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"sample-send-email"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

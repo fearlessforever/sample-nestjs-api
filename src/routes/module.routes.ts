@@ -7,10 +7,11 @@ import { SampleViewMvcModule } from "./sample-view-mvc/sample-view-mvc.module";
 import { SampleSseModule } from "./sample-sse/sample-sse.module";
 import { SampleSocketModule } from "./sample-socket/sample-socket.module";
 import { SampleQueueModule } from "./sample-queue/sample-queue.module";
+import { SampleSendEmailModule } from "./sample-send-email/sample-send-email.module";
 
 
 @Module({
-  imports: [AppModule, SampleModule, SampleEmployeesModule, SampleCacheUsageModule, SampleViewMvcModule, SampleSseModule, SampleSocketModule, SampleQueueModule],
+  imports: [AppModule, SampleModule, SampleEmployeesModule, SampleCacheUsageModule, SampleViewMvcModule, SampleSseModule, SampleSocketModule, SampleQueueModule, SampleSendEmailModule],
   controllers: [],
   providers: [],
 })

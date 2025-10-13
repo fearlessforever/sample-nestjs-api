@@ -26,11 +26,52 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Sample / Feature Available
+- Simple usage controller , validation , service and route
+- Sample how to forward all log to file log ( each log file separate by date )
+- Sample how to use rate-limiter
+- Sample how to use cache in app memory or using redis
+- Sample usage database ( prisma / ORM : model , type , interface , migrations ) in controller , service , route dan validator
+- Sample how to use queue ( require redis  ) for heavy process ( background process ) / Scheduler
+- Sample how to use SSE ( Server Sent Events ) - realtime feature only server can send data
+- Sample how to use socket.io - realtime feature server <-> client send data
+- Sample how to use view engine templating for monolith ( traditional mvc ) and templating engine for email
+- Sample how to use CI/CD for nestjs application
+- Sample how to generate docker image ( optional: push image to docker hub by CI/CD release version )
+- Sample how to send email ( required queue feature activate ) and using view engine templating like hbs , or ejs
+
 ## Build & Running the app in docker [Production]
 ```bash
 $ ./run build-docker
 $ ./run run-docker
 $ ./run stop-docker
+```
+## Requirement & Optional Feature if Activate
+- nodejs: v18.16
+- nestjs: ^10.0.0
+- redis:7.2-rc3 ( optional )
+- database: postgresql, mysql or mariadb ( optional )
+
+## For Debuging Postman file Environment & Collections
+- [Postman Environment](postman/Sample%20Nestjs%20Api%20Env.postman_environment.json)
+- [Postman Collections](postman/Sample%20Nestjs%20Api.postman_collection.json)
+
+## Docker Image ( production ready )
+```bash
+$ docker pull fearlessforever/nestjs-app:latest
+$ #run the image and send to background
+$ docker run -d \
+  --name my-nestjs \
+  -v $(pwd)/../logs:/logs \
+  -e IS_FORWARD_LOG_TO_FILE=true \
+  -p 3000:3000 \
+  --expose 3000 \
+  fearlessforever/nestjs-app:latest \
+  npm run start:prod
+$ #stop / kill it process
+$ docker kill my-nestjs
+$ #remove unused container
+$ docker rm my-nestjs
 ```
 
 ## Installation
@@ -76,12 +117,6 @@ $ npm run test:cov
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
 
 ## License
 
