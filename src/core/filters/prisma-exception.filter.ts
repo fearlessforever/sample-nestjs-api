@@ -15,7 +15,7 @@ export class PrismaExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
     let status = HttpStatus.INTERNAL_SERVER_ERROR;
-    let message = 'Unknown Error'
+    let message = 'Unknown Error' , messageShow = '[DB] Prisma Error / Validation'
     let stack: string|undefined = undefined
 
     if( exception instanceof PrismaClientKnownRequestError ){
@@ -34,14 +34,18 @@ export class PrismaExceptionFilter implements ExceptionFilter {
       status = HttpStatus.UNPROCESSABLE_ENTITY;
     }
 
+    if( message.indexOf('Unique constraint failed') > 0 ){
+       messageShow += ' - Duplicate Entry Unique Entity'
+    }
+
     this.logger.error(`[PrismaException] ${status} ${request.url}` )
-    this.logger.LogToFile(`[PrismaException] ${status} ${request.url} ${message}` ) // log detail error to file for debugging
+    this.logger.LogToFile('Error:[PrismaException] ',`${status} ${request.url} ${message} ${stack}`) // log detail error to file for debugging
 
     response
       .status(status)
       .json({
         statusCode: status,
-        message: '[DB] Prisma Error / Validation',
+        message: messageShow,
         timestamp: new Date().toISOString(),
         path: request.url,
       });

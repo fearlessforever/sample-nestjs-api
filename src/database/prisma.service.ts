@@ -14,7 +14,7 @@ export class PrismaService extends PrismaClient implements OnModuleInit , OnModu
   }
 
   async onModuleDestroy() {
-    this.logger.warn('DATABASE DESTROYED')
+    this.logger.warn('DATABASE CONNECTION IS DESTROYED')
     await this.$disconnect()
     
   }

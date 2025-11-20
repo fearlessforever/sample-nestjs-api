@@ -1,9 +1,10 @@
 #!/bin/bash
 
 declare -A commands=(
-  ['build-docker']=build-docker
-  ['run-docker']=run-docker
-  ['stop-docker']=stop-docker
+  ['docker-build']=docker-build
+  ['docker-up']=docker-up
+  ['docker-down']=docker-down
+  ['npm-in-docker']=npm-in-docker
 );
 
 selectedCMD=$1
@@ -12,16 +13,29 @@ if [[ $# -gt 0 && ${commands[$selectedCMD]} ]]; then
     shift
     if [[ ${commands[$selectedCMD]} ]]; then
 
-      if [[ $selectedCMD == 'build-docker' ]]; then
+      if [[ $selectedCMD == 'docker-build' ]]; then
         docker build -f docker/dockerfile -t my-nestjs:latest . --progress=plain --network=host
       fi
 
-      if [[ $selectedCMD == 'run-docker' ]]; then
-        docker-compose -f docker/docker-compose.yml up -d
+      if [[ $selectedCMD == 'docker-up' ]]; then
+        # docker compose -f docker/docker-compose.yml --env-file ./.env up -d
+        docker compose -f docker/docker-compose.yml --profile production  "$@" up -d
       fi
 
-      if [[ $selectedCMD == 'stop-docker' ]]; then
-        docker-compose -f docker/docker-compose.yml down
+      if [[ $selectedCMD == 'docker-down' ]]; then
+        docker compose -f docker/docker-compose.yml --profile production down
+      fi
+
+      if [[ $selectedCMD == 'npm-in-docker' ]]; then
+        checkApp=$(docker compose -f  docker/docker-compose.yml ps nestjs-app 2>&1 )
+        # checkApp=$(docker compose -f docker/docker-compose.yml exec -it nestjs-app npm "$@" 2>&1)
+        echo '==============================================='
+        if [[ $checkApp =~ 'nestjs-app' ]];then
+          docker compose -f docker/docker-compose.yml --env-file ./.env run -it nestjs-app npm "$@"
+        else
+          echo 'Service "nestjs-app" is not running. You can run "nestjs-app" by this command -> ./run docker-up '
+        fi
+        # docker compose -f docker/docker-compose.yml ps nestjs-app
       fi
 
     else
@@ -35,7 +49,7 @@ else
   echo ""
   echo "unknown command"
   echo "try one of these -> ${commands[@]}"
-  echo "example: ./run ${commands[build-docker]} "
+  echo "example: ./run ${commands[docker-build]} "
   echo ""
 
 fi

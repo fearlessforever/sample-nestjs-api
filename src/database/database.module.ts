@@ -1,4 +1,4 @@
-import { Module, Provider , Logger } from '@nestjs/common';
+import { Module, Provider , Logger, DynamicModule } from '@nestjs/common';
 import { PrismaService } from './prisma.service';
 
 // const providers: Provider[] = []
@@ -23,4 +23,13 @@ const SomeOptionServiceProvider: Provider = {
   providers: [SomeOptionServiceProvider],
   exports: [PrismaService] // Export to be injectable in other modules
 })
-export class DatabaseModule {}
+export class DatabaseModule {
+
+  static forRoot() : DynamicModule {
+    return {
+      module: DatabaseModule ,
+      providers: [SomeOptionServiceProvider],
+      exports: [PrismaService],
+    };
+  }
+}

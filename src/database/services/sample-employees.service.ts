@@ -1,4 +1,4 @@
-import { PrismaService } from '@/core/database/prisma.service';
+import { PrismaService } from '@/database/prisma.service';
 import { SampleEmployee } from '@DTO/sample-employee';
 import { SampleEmployeeStatus } from '@Models/sample-employee';
 import { Injectable, NotFoundException, Optional } from '@nestjs/common';

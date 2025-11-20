@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseGuards } from '@nestjs/common';
-import { SampleEmployeesService } from './sample-employees.service';
+import { SampleEmployeesService } from '@/database/services/sample-employees.service';
 import { SampleEmployee, SampleEmployeeStatusDTO, UpdateSampleEmployeeDto } from '@DTO/sample-employee';
 import { Throttle, ThrottlerGuard } from '@nestjs/throttler';
 
